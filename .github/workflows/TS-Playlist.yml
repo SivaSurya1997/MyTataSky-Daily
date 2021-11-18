@@ -3,22 +3,22 @@ on:
  workflow_dispatch:
   inputs:
     git_token:
-      description: 'Enter your GitHub Token'     
+      description: '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'     
       required: true
     tata_mobile:
-      description: 'Enter your Tata Sky Mobile Number'
+      description: '8098224124'
       required: true
     sub_id:
-      description: 'Enter your Tata Sky Subscriber ID'
+      description: '1371340835'
       required: true
     tata_pass:
-      description: 'Enter your Tata Sky Password'     
+      description: 'SIVAsurya@18'     
       required: true
     git_mail:
-      description: 'Enter your GitHub Mail Address'
+      description: 'sivasurya.k18@gmail.com'
       required: true
     git_id:
-      description: 'Enter your GitHub ID'
+      description: 'https://github.com/SivaSurya1997/MyTataSky-Daily'
       required: true
 jobs:
   build:
