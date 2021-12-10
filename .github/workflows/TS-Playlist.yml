@@ -3,22 +3,22 @@ on:
  workflow_dispatch:
   inputs:
     git_token:
-      description: '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'     
+      description: 'Enter your GitHub Token'     
       required: true
     tata_mobile:
-      description: '8098224124'
+      description: 'Enter your Tata Sky Mobile Number'
       required: true
     sub_id:
-      description: '1371340835'
+      description: 'Enter your Tata Sky Subscriber ID'
       required: true
     tata_pass:
-      description: 'SIVAsurya@18'     
+      description: 'Enter your Tata Sky Password'     
       required: true
     git_mail:
-      description: 'sivasurya.k18@gmail.com'
+      description: 'Enter your GitHub Mail Address'
       required: true
     git_id:
-      description: 'https://github.com/SivaSurya1997/MyTataSky-Daily'
+      description: 'Enter your GitHub ID'
       required: true
 jobs:
   build:
@@ -30,11 +30,11 @@ jobs:
       run: |
             git config --global user.name "${{ github.event.inputs.git_id }}"
             git config --global user.email "${{ github.event.inputs.git_mail }}"
-            git clone https://github.com/techiesneh/Sneh-TataSky
-            cd Sneh-TataSky/
+            git clone https://github.com/ForceGT/Tata-Sky-IPTV
+            cd Tata-Sky-IPTV/
             cd code_samples/
             sudo apt install expect -y
-            wget https://gist.githubusercontent.com/techiesneh/85392ca08bc5dc8cb44da00605450cf3/raw/TSlogin.exp
+            wget https://gitlab.com/-/snippets/2218535/raw/main/TSlogin.exp
             chmod 777 TSlogin.exp
             sed -i 's/PASSWORD/${{ github.event.inputs.tata_pass }}/g' TSlogin.exp
             sed -i 's/SUB_ID/${{ github.event.inputs.sub_id }}/g' TSlogin.exp
@@ -45,23 +45,23 @@ jobs:
             gh auth login --with-token < mytoken.txt
             mkdir git-repo/
             cd git-repo/
-            touch mytatasky.m3u
-            echo "Initial Test" >> mytatasky.m3u
-            gh gist create mytatasky.m3u | tee gist_link.txt
+            touch allChannelPlaylist.m3u
+            echo "Initial Test" >> allChannelPlaylist.m3u
+            gh gist create allChannelPlaylist.m3u | tee gist_link.txt
             sed -i 's/gist/${{ github.event.inputs.git_token }}@gist/g' gist_link.txt
             gist_url=$(cat gist_link.txt)
             dir="${gist_url##*/}"
-            git clone https://github.com/techiesneh/Sneh-TataSky
+            git clone https://github.com/ForceGT/Tata-Sky-IPTV
             gh repo create MyTataSky-Daily --private -y || echo "New repo has been created"
-            mv ../TSlogin.exp Sneh-TataSky/code_samples/
-            chmod 755 Sneh-TataSky/code_samples/TSlogin.exp
-            cd Sneh-TataSky/
+            mv ../TSlogin.exp Tata-Sky-IPTV/code_samples/
+            chmod 755 Tata-Sky-IPTV/code_samples/TSlogin.exp
+            cd Tata-Sky-IPTV/
             mkdir .github
             cd .github
             mkdir workflows
             cd workflows
-            wget https://gist.githubusercontent.com/techiesneh/adf36935d770074a6ba9484f2e3a5df8/raw/TSDailyWF.yml
-            wget https://gist.githubusercontent.com/techiesneh/66cc049ca1c58729e1f26c0fa9287d42/raw/TSaddon.txt
+            wget https://gitlab.com/-/snippets/2218538/raw/main/TSDailyWF.yml
+            wget https://gitlab.com/-/snippets/2218537/raw/main/TSaddon.txt
             export dir=$dir
             export gist_url=$gist_url
             export git_id=${{ github.event.inputs.git_id }}
@@ -75,8 +75,8 @@ jobs:
             git clone https://${{ github.event.inputs.git_token }}@github.com/${{ github.event.inputs.git_id }}/MyTataSky-Daily
             rm -rf MyTataSky-Daily/*
             rm -rf MyTataSky-Daily/.github
-            mv Sneh-TataSky/* MyTataSky-Daily/
-            mv Sneh-TataSky/.github MyTataSky-Daily/
+            mv Tata-Sky-IPTV/* MyTataSky-Daily/
+            mv Tata-Sky-IPTV/.github MyTataSky-Daily/
             cd MyTataSky-Daily/
             git add .
             git commit --author="TechieSneh<techiesneh@gmail.com>" -m "Update Repo"
